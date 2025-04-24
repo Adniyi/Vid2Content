@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 import os
 from pytube import YouTube
 import yt_dlp
+import mimetypes
+import re
 
 
 load_dotenv()
@@ -25,14 +27,25 @@ class Transcript:
         # DistilBERT Setup (Lighter and Faster version of BERT)
         self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
         self.distilbert_model = DistilBertModel.from_pretrained('distilbert-base-uncased')
+        self.audio_path = None
 
 
+    def sanitize_filename(self, filename):
+        # Replace invalid characters with an underscore
+        return re.sub(r'[<>:"/\\|?*]', '', filename)
+    
+    
     def download_youtube_video(self, video_url):
+        if self.audio_path and os.path.exists(self.audio_path):
+            return self.audio_path
         try:
             with yt_dlp.YoutubeDL({'quiet':True}) as ydl:
                info_dict = ydl.extract_info(video_url, download=False)
                title = info_dict.get('title', 'audio').replace(' ', '_')
-               audio_filename = f"./static/uploads/{title}.mp3"
+
+            # Sanitize the filename before download
+            sanitized_title = self.sanitize_filename(title)
+            audio_filename = f"./static/uploads/{sanitized_title}.mp3"
 
             if os.path.exists(audio_filename):
                print(f"Audio already exits: {audio_filename}") 
@@ -50,36 +63,38 @@ class Transcript:
                 ydl.download([video_url])
 
             print(f"Audio downloaded: {audio_filename}")
+            self.audio_path = audio_filename
             return audio_filename
            
         except Exception as e:
            print(f"Error Downloading video: {e}")
            return None
 
-    def upload_audio_url(self,audio_path):
-        # turn the audio path to a url
-        transcriber = aai.Transcriber()
-        upload_url = transcriber.upload_file(audio_path)
-        return upload_url
+    # def upload_audio_url(self,audio_path):
+    #     # turn the audio path to a url
+    #     transcriber = aai.Transcriber()
+    #     upload_url = transcriber.upload_file(audio_path)
+    #     return upload_url
 
-    def transcribe_video_with_assemblyai(self,video_url):
+    def transcribe_video_with_assemblyai(self,audio_path):
         # Step1: Download the youtube video
-        audio_path = self.download_youtube_video(video_url=video_url)
+        # audio_path = self.download_youtube_video(video_url=video_url)
 
         # Step2: Upload the audio file to assembly ai
-        upload_url = self.upload_audio_url(audio_path=audio_path)
-        print(f"[DEBUG]: Uploaded audio file {upload_url}")
+        # upload_url = self.upload_audio_url(audio_path=audio_path)
+        # print(f"[DEBUG]: Uploaded audio file {upload_url}")
 
         # Step3: transcription job on AssemblyAI
         transcript = aai.Transcriber()
-        result = transcript.transcribe(upload_url)
+        config = aai.TranscriptionConfig(speech_model=aai.SpeechModel.slam_1)
+        result = transcript.transcribe(audio_path,config)
 
-        if result.status == 'error':
+        if result.status == aai.TranscriptStatus.error:
             raise Exception(f"Transcription failed: {result.error}")
 
         # Poll until transcription is complete
-        while result.status != 'completed':
-            result = transcript.get_result(result.id)
+        # while result.status != 'completed':
+        #     result = transcript.get_result(result.id)
         
         return result.text
     

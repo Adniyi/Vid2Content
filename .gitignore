@@ -4,3 +4,10 @@ env
 .env
 requirements
 .env
+celery_workey.py
+file.py
+task.py
+test2.py
+text.txt
+uploads/
+dns.py
