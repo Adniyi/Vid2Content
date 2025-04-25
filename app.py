@@ -1,15 +1,29 @@
+import eventlet
+eventlet.monkey_patch()
 from flask import Flask, render_template,request,jsonify, Response, stream_with_context
 from flask_cors import CORS
 from transcript2 import Transcript
 import time
 from flask_socketio import SocketIO
+from dotenv import load_dotenv
+import os
+import json
+
+
+CACHE_FILE = "transcript.json"
+
+# def load_json()
+
+load_dotenv()
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = "04f59756-0478-4a54-8d06-178a3aa335fa"
+app.config['SECRET_KEY'] = os.getenv("SECRETE_KEY")
 
 CORS(app)
 
 socketio = SocketIO(app,cors_allowed_origins="*", async_mode="eventlet")
+
+
 
 transcript_cache = {}
 
@@ -53,7 +67,7 @@ def transcript():
     # return jsonify({"message":"success.."})
     if video_url in transcript_cache:
         cached = transcript_cache[video_url]
-        return jsonify({"message":"success"}),200
+        return jsonify(cached),200
     
     processor = Transcript(video_url)
 
@@ -72,7 +86,7 @@ def transcript():
         raw_text = processor.transcribe_video_with_assemblyai(audio_path)
 
         print("[🎯] Extracting keywords from the transcript")
-        socketio.emit("progess",{"message":"🎯 Extracting keywords..."})
+        socketio.emit("progress",{"message":"🎯 Extracting keywords..."})
         transcript_text = processor.extract_tfidf_keywords(raw_text)
         distiled_text = processor.extract_distilbert_keywords(raw_text)
 
@@ -87,6 +101,8 @@ def transcript():
             'combined_keywords':combined_keywords
         }
         print(transcript_cache)
+
+        socketio.emit("done",transcript_cache)
         # time.sleep(5)
         return jsonify({
             "message": "Success",
@@ -107,4 +123,5 @@ def titleopt():
 
 if __name__ == "__main__":
     # app.run(debug=True)
-    socketio.run(app,debug=True)
+    with app.app_context():
+        socketio.run(app,debug=True)

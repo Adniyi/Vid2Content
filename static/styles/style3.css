@@ -134,3 +134,9 @@ button:disabled {
     margin-top: 10px;
     display: none;
 }
+.socket-message {
+    color: #5cb85c;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
