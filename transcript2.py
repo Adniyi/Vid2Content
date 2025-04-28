@@ -70,19 +70,9 @@ class Transcript:
            print(f"Error Downloading video: {e}")
            return None
 
-    # def upload_audio_url(self,audio_path):
-    #     # turn the audio path to a url
-    #     transcriber = aai.Transcriber()
-    #     upload_url = transcriber.upload_file(audio_path)
-    #     return upload_url
+
 
     def transcribe_video_with_assemblyai(self,audio_path):
-        # Step1: Download the youtube video
-        # audio_path = self.download_youtube_video(video_url=video_url)
-
-        # Step2: Upload the audio file to assembly ai
-        # upload_url = self.upload_audio_url(audio_path=audio_path)
-        # print(f"[DEBUG]: Uploaded audio file {upload_url}")
 
         # Step3: transcription job on AssemblyAI
         transcript = aai.Transcriber()

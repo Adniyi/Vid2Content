@@ -1,5 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', () => {
+    // import { marked } from ;
     // DOM elements
     const processBtn = document.getElementById('process-btn');
     const spinner = document.getElementById('spinner');
@@ -21,25 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // document.getElementById("status").innerText = data.message;
         displayProgress(data.message)
     });
+    
+    
+    
 
-    socket.on("done", (data) => {
-        console.log("[DONE]", data);
-        // document.getElementById("result-content").innerText = JSON.stringify(data, null, 2);
-        // displayProgress(data.message);
-        console.log(data);
-        // Display result content
-        showResult(data.text);
-    });
-
-    socket.on("error", (data) => {
-        console.error("[ERROR]", data.message);
-        // document.getElementById("status").innerText = "❌ " + data.message;
-        displayProgress(data.message);
-    });
+    // socket.on("error", (data) => {
+    //     console.error("[ERROR]", data.message);
+    //     // document.getElementById("status").innerText = "❌ " + data.message;
+    //     displayProgress(data.message);
+    // });
 
 
     // Event listener for process button
     processBtn.addEventListener("click", fetchWithTimeout);
+    copyBtn.addEventListener('click', copyContent);
 
     /**
      * Handle video URL submission and process the video
@@ -71,8 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Server responded with ${response.status}`);
             }
 
-            const data = await response.json();
-            console.log(data);
+            // const data = await response.json();
+            const reader = response.body.getReader();
+            let output = "";
+            
+
+            while(true){
+                const {done, value } = await reader.read()
+                output += new TextDecoder().decode(value)
+                showResult(output); 
+
+                if(done){
+                    return;
+                }
+            }
+            // console.log(data.combined_keywords);
+            // console.log(data.text);
 
             // Handle server error in response
             if (data.error) {
@@ -80,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 result.style.display = "none";
             } else {
                 // Display result content
-                showResult(data.content);
+                showResult(data.text);
             }
         } catch (error) {
             console.error('Error processing YouTube link:', error);
@@ -122,15 +131,41 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {string} content
      */
     function showResult(content) {
+        const html = marked.parse(content);
         result.style.display = 'block';
-        resultContent.innerHTML = content;
+        resultContent.innerHTML = html;
     }
 
     function displayProgress(message){
         socketMessage.style.display = "block";
         socketMessage.innerText = message;
     }
- 
+    
+    function copyContent(){
+        const content = resultContent.innerHTML;
+
+        if(content.trim() === ""){
+            copyTooltip.innerText = "Nothing to copy";
+            return;
+        }
+
+        // Try to copy
+        // if(navigator.clipboard){
+
+        // }
+
+        navigator.clipboard.writeText(content)
+        .then(()=>{
+            copyTooltip.innerText = "Coppied to clipboard!";
+        })
+        .catch((error)=>{
+            copyTooltip.innerText = "Failed to copy!";
+        })
+
+        setTimeout(()=>{
+            copyTooltip.innerText = "Copy!";
+        },2000);
+    }
 });
 
 
