@@ -149,22 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Try to copy
-        // if(navigator.clipboard){
-
-        // }
-
         navigator.clipboard.writeText(content)
         .then(()=>{
-            copyTooltip.innerText = "Coppied to clipboard!";
-        })
-        .catch((error)=>{
-            copyTooltip.innerText = "Failed to copy!";
-        })
+            copyTooltip.style.display = "block";
 
-        setTimeout(()=>{
-            copyTooltip.innerText = "Copy!";
-        },2000);
+            setTimeout(()=>{
+                copyTooltip.style.display = "none";
+            },2000);
+        });
+
     }
 });
 

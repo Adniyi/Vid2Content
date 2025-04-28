@@ -3,13 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>VideoScript - Convert YouTube Videos to SEO Articles</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Landing Page -->
-     <h1>Landing Page</h1>
-     <a href="youtube-link-processor.html">Process Link</a>
-     <a href="youtube-link-processor-v2.html">Process Link2</a>
-     <a href="/video_transcript">Process Link3</a>
+    <!-- Header -->
+    {% include 'partials/nav.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform YouTube Videos Into SEO-Optimized Articles in Minutes</h1>
+                <p class="subheadline">Save hours of content creation time. Our AI-powered tool converts video content into engaging, search-friendly articles that rank higher on Google.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large">Start Converting for Free</a>
+                    <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400" alt="VideoScript in action">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose VidScript?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Convert a 30-minute video into a 1500+ word article in less than 5 minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Optimized</h3>
+                    <p>AI-powered keyword analysis ensures your content ranks higher on search engines.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Smart Formatting</h3>
+                    <p>Automatically creates headings, bullet points, and proper article structure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Easy Editing</h3>
+                    <p>Fine-tune your articles with our intuitive editor before exporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Paste YouTube URL</h3>
+                    <p>Simply copy and paste the URL of any YouTube video you want to convert.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Processes Video</h3>
+                    <p>Our advanced AI transcribes, analyzes, and restructures the content.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Edit & Optimize</h3>
+                    <p>Review the generated article and make any desired adjustments.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Export & Publish</h3>
+                    <p>Download your SEO-friendly article or publish directly to WordPress.</p>
+                </div>
+            </div>
+            <div class="demo-container">
+                <img src="https://via.placeholder.com/800x450" alt="Product demo" class="demo-image">
+                <a href="#" class="play-button">
+                    <i class="fas fa-play"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"VidScript has cut my content creation time in half. The articles it generates are well-structured and need minimal editing."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/60x60" alt="Sarah J." class="author-image">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Content Creator</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I've seen a 40% increase in organic traffic since I started using VidScript to repurpose my YouTube content."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/60x60" alt="Mark T." class="author-image">
+                        <div class="author-info">
+                            <h4>Mark Thompson</h4>
+                            <p>Digital Marketer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The SEO optimization is impressive. My articles are ranking for keywords I didn't even specifically target."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/60x60" alt="Lisa R." class="author-image">
+                        <div class="author-info">
+                            <h4>Lisa Rodriguez</h4>
+                            <p>SEO Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Video Content?</h2>
+            <p>Join thousands of content creators who are saving time and boosting their SEO rankings.</p>
+            <a href="#" class="btn btn-primary btn-large">Start Your Free Trial</a>
+            <p class="no-credit-card">No credit card required. 5 free conversions included.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>VidScript</h2>
+                    <p>Transform videos into SEO-optimized articles</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Product</h3>
+                        <ul>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Updates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">API Docs</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">GDPR</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="copyright">&copy; 2023 VideoScript. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

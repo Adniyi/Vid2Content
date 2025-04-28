@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - VideoScript</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    {% include 'partials/nav.html' %}
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <img src="https://via.placeholder.com/100x100" alt="User Avatar">
+                    </div>
+                    <div class="profile-details">
+                        <h1>John Doe</h1>
+                        <p>Premium Plan · Member since January 2023</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number">42</span>
+                                <span class="stat-label">Articles Created</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">18</span>
+                                <span class="stat-label">Videos Converted</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">28</span>
+                                <span class="stat-label">Conversions Left</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <a href="/video_transcript" class="btn btn-primary">Convert New Video</a>
+                    <a href="#" class="btn btn-outline">Upgrade Plan</a>
+                </div>
+            </div>
+
+            <!-- Profile Navigation -->
+            <div class="profile-nav">
+                <ul>
+                    <li class="active"><a href="#recent-conversions">Recent Conversions</a></li>
+                    <li><a href="#saved-articles">Saved Articles</a></li>
+                    <li><a href="#account-settings">Account Settings</a></li>
+                    <li><a href="#billing">Billing</a></li>
+                </ul>
+            </div>
+
+            <!-- Recent Conversions -->
+            <div id="recent-conversions" class="profile-content active">
+                <h2>Recent Conversions</h2>
+                <div class="conversions-list">
+                    <div class="conversion-item">
+                        <div class="conversion-thumbnail">
+                            <img src="https://via.placeholder.com/160x90" alt="Video Thumbnail">
+                        </div>
+                        <div class="conversion-details">
+                            <h3>How to Master SEO in 2023 - Complete Guide</h3>
+                            <p class="conversion-meta">
+                                <span><i class="fas fa-calendar"></i> Converted on May 15, 2023</span>
+                                <span><i class="fas fa-clock"></i> 15:42 video</span>
+                                <span><i class="fas fa-file-alt"></i> 2,450 words</span>
+                            </p>
+                            <div class="conversion-tags">
+                                <span class="tag">SEO</span>
+                                <span class="tag">Digital Marketing</span>
+                                <span class="tag">Tutorial</span>
+                            </div>
+                        </div>
+                        <div class="conversion-actions">
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Export</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    <div class="conversion-item">
+                        <div class="conversion-thumbnail">
+                            <img src="https://via.placeholder.com/160x90" alt="Video Thumbnail">
+                        </div>
+                        <div class="conversion-details">
+                            <h3>10 Content Marketing Strategies That Actually Work</h3>
+                            <p class="conversion-meta">
+                                <span><i class="fas fa-calendar"></i> Converted on May 10, 2023</span>
+                                <span><i class="fas fa-clock"></i> 22:18 video</span>
+                                <span><i class="fas fa-file-alt"></i> 3,120 words</span>
+                            </p>
+                            <div class="conversion-tags">
+                                <span class="tag">Content Marketing</span>
+                                <span class="tag">Strategy</span>
+                            </div>
+                        </div>
+                        <div class="conversion-actions">
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Export</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    <div class="conversion-item">
+                        <div class="conversion-thumbnail">
+                            <img src="https://via.placeholder.com/160x90" alt="Video Thumbnail">
+                        </div>
+                        <div class="conversion-details">
+                            <h3>The Ultimate Guide to YouTube Algorithm in 2023</h3>
+                            <p class="conversion-meta">
+                                <span><i class="fas fa-calendar"></i> Converted on May 5, 2023</span>
+                                <span><i class="fas fa-clock"></i> 18:05 video</span>
+                                <span><i class="fas fa-file-alt"></i> 2,780 words</span>
+                            </p>
+                            <div class="conversion-tags">
+                                <span class="tag">YouTube</span>
+                                <span class="tag">Algorithm</span>
+                                <span class="tag">Growth</span>
+                            </div>
+                        </div>
+                        <div class="conversion-actions">
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Export</a>
+                            <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination">
+                    <a href="#" class="pagination-prev disabled"><i class="fas fa-chevron-left"></i></a>
+                    <a href="#" class="pagination-number active">1</a>
+                    <a href="#" class="pagination-number">2</a>
+                    <a href="#" class="pagination-number">3</a>
+                    <span class="pagination-ellipsis">...</span>
+                    <a href="#" class="pagination-number">8</a>
+                    <a href="#" class="pagination-next"><i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>VidScript</h2>
+                    <p>Transform videos into SEO-optimized articles</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Product</h3>
+                        <ul>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Updates</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">API Docs</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">GDPR</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="copyright">&copy; 2023 VideoScript. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

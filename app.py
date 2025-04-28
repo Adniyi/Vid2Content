@@ -187,6 +187,16 @@ def transcript():
 def titleopt():
     return "Page for SEO title optimizer", 200  
 
+
+@app.route("/profile")
+def profile():
+    return render_template("profile.html"), 200
+
+
+
+@app.route("/contact_us")
+def contact_us():
+    return render_template("contact.html"), 200
 if __name__ == "__main__":
     # app.run(debug=True)
     with app.app_context():

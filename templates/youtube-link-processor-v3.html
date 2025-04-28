@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/static/styles/style3.css">
+  <link rel="stylesheet" href="/static/styles/generate.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <title>YouTube Link Processor</title>
   <style>
@@ -12,10 +12,11 @@
 </head>
 <body>
   <!-- Space for your navigation bar -->
-  
+  {% set active_page = 'contact' %}
+  {% include 'partials/nav.html' %}
   <div class="main-content">
     <div class="main-wrapper">
-      <div class="container">
+      <div class="sub-container">
         <h2>YouTube Link Processor</h2>
         <div class="input-container">
           <input type="text" id="youtube-link" placeholder="Paste YouTube video link here...">
@@ -43,6 +44,65 @@
       </div>
     </div>
   </div>
+
+  <footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>VideoScript</h2>
+                <p>Transform videos into SEO-optimized articles</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="/contact_us">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">API Docs</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 VideoScript. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
 
   <script src="/static/js/script4.js"></script>
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
