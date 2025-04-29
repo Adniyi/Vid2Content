@@ -6,10 +6,9 @@ import torch
 import numpy as np
 from dotenv import load_dotenv
 import os
-from pytube import YouTube
 import yt_dlp
-import mimetypes
 import re
+import asyncio
 
 
 load_dotenv()
@@ -150,3 +149,10 @@ class Transcript:
         # Combine and trim
         combined = common + tfidf_only + distilbert_only
         return combined[:max_keywords]
+
+
+    async def download_video_async(self,video_url):
+        return await asyncio.to_thread(self.download_youtube_video, video_url)
+    
+    async def transcribe_audio_async(self, audio_path):
+        return await asyncio.to_thread(self.transcribe_video_with_assemblyai, audio_path)

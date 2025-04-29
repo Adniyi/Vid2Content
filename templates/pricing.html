@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - VideoScript</title>
+    <link rel="stylesheet" href="/static/styles/pricing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    {% include 'partials/nav.html' %}
+
+    <!-- Pricing Header Section -->
+    <section class="pricing-header">
+        <div class="container">
+            <h1>Simple, Transparent Pricing</h1>
+            <p>Choose the plan that's right for your content creation needs</p>
+            <div class="pricing-toggle">
+                <span class="toggle-label">Monthly</span>
+                <label class="switch">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Annual <span class="save-badge">Save 20%</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans Section -->
+    <section class="pricing-plans">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Free</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">0</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p>Perfect for trying out our service</p>
+                    </div>
+                    <div class="pricing-card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> 5 video conversions per month</li>
+                            <li><i class="fas fa-check"></i> Basic SEO optimization</li>
+                            <li><i class="fas fa-check"></i> Up to 10-minute videos</li>
+                            <li><i class="fas fa-check"></i> Standard export formats</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Advanced SEO features</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Custom templates</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Priority processing</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <a href="#" class="btn btn-outline btn-large">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-card-header">
+                        <h3>Pro</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount monthly">29</span>
+                            <span class="amount annual">23</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p>For content creators and small businesses</p>
+                    </div>
+                    <div class="pricing-card-body">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> <strong>30</strong> video conversions per month</li>
+                            <li><i class="fas fa-check"></i> Advanced SEO optimization</li>
+                            <li><i class="fas fa-check"></i> Up to 30-minute videos</li>
+                            <li><i class="fas fa-check"></i> All export formats</li>
+                            <li><i class="fas fa-check"></i> Priority email support</li>
+                            <li><i class="fas fa-check"></i> Custom templates</li>
+                            <li><i class="fas fa-check"></i> WordPress integration</li>
+                            <li class="disabled"><i class="fas fa-times"></i> API access</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <a href="#" class="btn btn-primary btn-large">Upgrade to Paid</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison Section -->
+    <section class="feature-comparison">
+        <div class="container">
+            <h2>Compare All Features</h2>
+            <div class="table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free</th>
+                            <th>Pro</th>
+                            <!-- <th>Enterprise</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly video conversions</td>
+                            <td>5</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Maximum video length</td>
+                            <td>10 minutes</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>SEO optimization level</td>
+                            <td>Basic</td>
+                            <td>Premium</td>
+                        </tr>
+                        <tr>
+                            <td>Export formats</td>
+                            <td>HTML</td>
+                            <td>HTML, MD</td>
+                        </tr>
+                        <tr>
+                            <td>Custom templates</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>WordPress integration</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>API access</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Support</td>
+                            <td>Email</td>
+                            <td>Email</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="pricing-faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Can I upgrade or downgrade my plan at any time?</h3>
+                    <p>Yes, you can upgrade or downgrade your plan at any time. When upgrading, the new features will be available immediately. When downgrading, the changes will take effect at the start of your next billing cycle.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do unused conversions roll over to the next month?</h3>
+                    <p>No, unused conversions do not roll over to the next month. Your conversion quota resets at the beginning of each billing cycle.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover) as well as PayPal. For Enterprise plans, we can also accommodate bank transfers and purchase orders.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is there a contract or commitment?</h3>
+                    <p>No, all our plans are month-to-month with no long-term commitment required. Annual plans are billed once per year but can be canceled anytime with a prorated refund.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What happens if I exceed my monthly conversion limit?</h3>
+                    <p>If you reach your monthly conversion limit, you won't be able to convert additional videos until your quota resets. You can upgrade your plan at any time to increase your limit.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer discounts for nonprofits or educational institutions?</h3>
+                    <p>Yes, we offer special pricing for nonprofits, educational institutions, and students. Please contact our sales team for more information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Video Content?</h2>
+            <p>Join thousands of content creators who are saving time and boosting their SEO rankings.</p>
+            <a href="#" class="btn btn-primary btn-large">Upgrade to Paid</a>
+            <p class="no-credit-card">No credit card required for free plan. Cancel anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <script src="script.js"></script>
+    <script>
+        // Toggle between monthly and annual pricing
+        document.getElementById('billing-toggle').addEventListener('change', function() {
+            const isAnnual = this.checked;
+            const monthlyPrices = document.querySelectorAll('.amount.monthly');
+            const annualPrices = document.querySelectorAll('.amount.annual');
+            
+            monthlyPrices.forEach(price => {
+                price.style.display = isAnnual ? 'none' : 'inline';
+            });
+            
+            annualPrices.forEach(price => {
+                price.style.display = isAnnual ? 'inline' : 'none';
+            });
+        });
+        
+        // Initialize pricing display
+        window.addEventListener('DOMContentLoaded', function() {
+            const annualPrices = document.querySelectorAll('.amount.annual');
+            annualPrices.forEach(price => {
+                price.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

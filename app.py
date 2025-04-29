@@ -100,7 +100,8 @@ def transcript():
     try:
         print("[✅] Downloading video...")
         socketio.emit("progress",{"message":"✅ Downloading video..."})
-        audio_path = processor.download_youtube_video(video_url=video_url)
+        # audio_path = processor.download_youtube_video(video_url=video_url)
+        audio_path = processor.download_video_async(video_url=video_url)
 
         print("[🔄] Uploading audio file to Assembly...")
         socketio.emit("progress", {"message": "🔄 Uploading to AssemblyAI..."})
@@ -109,7 +110,7 @@ def transcript():
 
         print("[✍️] Transcribing Audio...")
         socketio.emit("progress", {"message": "✍️ Transcribing..."})
-        raw_text = processor.transcribe_video_with_assemblyai(audio_path)
+        raw_text = processor.transcribe_audio_async(audio_path)
 
         print("[🎯] Extracting keywords from the transcript")
         socketio.emit("progress",{"message":"🎯 Extracting keywords..."})
@@ -156,33 +157,6 @@ def transcript():
 
 
 
-# @app.route("/generate_article")
-# def generate_article():
-#     data = request.args.get("key")
-#     result = cache.get(data)
-
-#     if not result:
-#         return jsonify({"Message":"No Transcription Data found in Cache"}), 200
-    
-#     raw_text = result['text']
-#     transcript_text = result['text_keyword']
-#     distiled_keyword = result['distiled_text']
-
-    # prompt = generate_seo_article(raw_text,transcript_text,distiled_keyword)
-
-    # def generate():
-    #     try:
-    #         response = client.models.generate_content_stream(
-    #             model="gemini-2.0-flash",
-    #             contents=prompt
-    #         )
-    #         for chunk in response:
-    #             if chunk.text is not None:
-    #                 yield chunk.text
-    #             print(chunk.text, end="")
-    #     except Exception as e:
-    #         yield f"Error occurred: {e}"
-    # return generate() ,{"Content-Type": "text/markdown"}
 
 def titleopt():
     return "Page for SEO title optimizer", 200  
@@ -197,6 +171,12 @@ def profile():
 @app.route("/contact_us")
 def contact_us():
     return render_template("contact.html"), 200
+
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.html")
+
+
 if __name__ == "__main__":
     # app.run(debug=True)
     with app.app_context():
