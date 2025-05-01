@@ -90,7 +90,7 @@ button:disabled {
 }
 
 .result {
-    display: none;
+    display: none;  
     padding: 15px;
     /* background-color: ; */
     border-radius: 8px;
@@ -135,4 +135,15 @@ button:disabled {
     font-size: 14px;
     margin-top: 10px;
     display: none;
+}
+
+.download-container{
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    margin-bottom: 10px;
+    gap: 100px;
+
+    display: none;
+
 }

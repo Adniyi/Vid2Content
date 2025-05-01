@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const resultContent = document.getElementById('result-content');
     const socketMessage = document.getElementById('socket-message');
-
+    const downloadContainer = document.getElementById('download-container');
+    const downlaodHtml = document.getElementById('downloadHmtl');
+    const downlaodTxt = document.getElementById('downloadTxt');
+    const downloadMd = document.getElementById('downloadMD');
+    let raw_markdown = "";
     // API endpoint and socket connection
     const API_ENDPOINT = "http://127.0.0.1:5000/transcript";
     const socket = io("http://localhost:5000");
@@ -35,6 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for process button
     processBtn.addEventListener("click", fetchWithTimeout);
     copyBtn.addEventListener('click', copyContent);
+    downlaodHtml.addEventListener('click', () => {
+        const htmlContent = resultContent.innerHTML;
+        downloadContent('transcript.html', htmlContent,'text/html');
+    });
+
+    downlaodTxt.addEventListener('click', ()=>{
+        const plainContent = resultContent.innerText;
+        downloadContent('transcript.txt', plainContent, 'text/plain');
+    });
+
+    downloadMd.addEventListener('click', ()=>{
+        const markdownContent = raw_markdown;
+        downloadContent('transcript.md', markdownContent, 'text/markdown');
+    });
 
     /**
      * Handle video URL submission and process the video
@@ -66,13 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Server responded with ${response.status}`);
             }
 
-            // const data = await response.json();
+            const ErrorMessage = response.error;
+            if(ErrorMessage){
+                showResult(ErrorMessage);
+            }
             const reader = response.body.getReader();
             let output = "";
             
 
             while(true){
-                const {done, value } = await reader.read()
+                const { done, value } = await reader.read()
                 output += new TextDecoder().decode(value)
                 showResult(output); 
 
@@ -80,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
             }
+
+
             // console.log(data.combined_keywords);
             // console.log(data.text);
 
@@ -130,10 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
      * Show the transcription result
      * @param {string} content
      */
+    
     function showResult(content) {
+        raw_markdown = content;
         const html = marked.parse(content);
         result.style.display = 'block';
         resultContent.innerHTML = html;
+        downloadContainer.style.display = 'block';
     }
 
     function displayProgress(message){
@@ -158,6 +184,19 @@ document.addEventListener('DOMContentLoaded', () => {
             },2000);
         });
 
+    }
+
+    function downloadContent(filename, content, mimetype){
+        const blob = new Blob([content], {type: mimetype});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 });
 

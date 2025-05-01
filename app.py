@@ -1,29 +1,17 @@
 # import eventlet
 # eventlet.monkey_patch()
-from flask import Flask, render_template,request,jsonify, Response, stream_with_context,redirect,url_for
+from flask import Flask, render_template,request,jsonify,redirect,url_for
 from flask_cors import CORS
 from transcript2 import Transcript
 import time
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import os
-import json
 from flask_caching import Cache
 from google import genai
+import asyncio
 
-# CACHE_FILE = "transcript.json"
 
-# def load_json():
-#     '''Load Cached Data'''
-#     if os.path.exists(CACHE_FILE):
-#         with open(CACHE_FILE, 'r') as file:
-#             return json.load(file)
-#     return {}
-
-# def save_cache():
-#     '''Save Transcript to Json File'''
-#     with open(CACHE_FILE, 'w') as file:
-#         json.dump(transcript_cache, file)
 load_dotenv()
 
 
@@ -101,7 +89,8 @@ def transcript():
         print("[✅] Downloading video...")
         socketio.emit("progress",{"message":"✅ Downloading video..."})
         # audio_path = processor.download_youtube_video(video_url=video_url)
-        audio_path = processor.download_video_async(video_url=video_url)
+        audio_path = asyncio.run(processor.download_video_async(video_url=video_url))
+        # print(filename)
 
         print("[🔄] Uploading audio file to Assembly...")
         socketio.emit("progress", {"message": "🔄 Uploading to AssemblyAI..."})
@@ -110,7 +99,8 @@ def transcript():
 
         print("[✍️] Transcribing Audio...")
         socketio.emit("progress", {"message": "✍️ Transcribing..."})
-        raw_text = processor.transcribe_audio_async(audio_path)
+        raw_text = asyncio.run(processor.transcribe_audio_async(audio_path))
+        # raw_text = processor.transcribe_video_with_assemblyai(audio_path)
 
         print("[🎯] Extracting keywords from the transcript")
         socketio.emit("progress",{"message":"🎯 Extracting keywords..."})
