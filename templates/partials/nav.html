@@ -1,9 +1,11 @@
+{# templates/partials/nav.html #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/style.css">
+    <script src="https://js.paystack.co/v2/inline.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -48,21 +50,17 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="/pricing">Pricing</a></li>
                     <!-- <li><a href="profile.html" class="btn btn-outline">My Account</a></li> -->
-                    <li><a href="/video_transcript" class="btn btn-primary">Get Started</a></li>
-                    <div class="profile-container">
-                        <div class="profile-pic">
-                            <a href="/profile" style="color: black;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="/profile" class="btn btn-outline">My Account</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a></li>
+                    {% else %}
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
+                    <li><a href="{{ url_for('register') }}" class="btn btn-primary">Register</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

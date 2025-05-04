@@ -42,11 +42,19 @@
           <p>Video information will appear here after processing.</p>
           <br>
         </div>
-        <div class="download-container" id="download-container">
-          <button class="btn btn-outline" id="downloadHmtl">Download as HTML</button>
-          <button class="btn btn-primary btn-large" id="downloadTxt">Download as TXT</button>
-          <button class="btn btn-secondary btn-large" id="downloadMD">Download as MD </button>
-        </div>
+        {% if current_user.is_authenticated %}
+          <div class="download-container" id="download-container">
+            <button class="btn btn-outline" id="downloadHmtl">Download as HTML</button>
+            <button class="btn btn-primary btn-large" id="downloadTxt">Download as TXT</button>
+            <button class="btn btn-secondary btn-large" id="downloadMD">Download as MD </button>
+          </div>
+        {% else if %}
+          <div class="register-container">
+            <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
+            <strong>or</strong>
+            <li><a href="{{ url_for('register') }}" class="btn btn-primary">Register</a></li>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

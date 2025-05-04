@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/styles/style.css" />
+</head>
+<body>
+    {% include 'partials/nav.html' %}
+
+    <h1 style="margin-top: 30px; text-align: center;">Register</h1>
+    <div class="contact-content">
+        <div class="contact-form-container">
+            <form id="contact-form" class="contact-form" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password" />
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-large">Register</button>
+                </div>
+            </form>
+            <p style="text-align: center;" >Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    {% include 'partials/footer.html' %}
+</body>
+</html>

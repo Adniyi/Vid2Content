@@ -16,14 +16,14 @@
         <div class="container">
             <h1>Simple, Transparent Pricing</h1>
             <p>Choose the plan that's right for your content creation needs</p>
-            <div class="pricing-toggle">
+            <!-- <div class="pricing-toggle">
                 <span class="toggle-label">Monthly</span>
                 <label class="switch">
                     <input type="checkbox" id="billing-toggle">
                     <span class="slider round"></span>
                 </label>
                 <span class="toggle-label">Annual <span class="save-badge">Save 20%</span></span>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -55,7 +55,7 @@
                         </ul>
                     </div>
                     <div class="pricing-card-footer">
-                        <a href="#" class="btn btn-outline btn-large">Get Started</a>
+                        <a href="#"  data-plan-id="1" class="btn btn-outline btn-large plan-subscribe">Get Started</a>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                         </ul>
                     </div>
                     <div class="pricing-card-footer">
-                        <a href="#" class="btn btn-primary btn-large">Upgrade to Paid</a>
+                        <a href="#"  data-plan-id="2" class="btn btn-primary btn-large plan-subscribe">Subscribe to Pro</a>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
         <div class="container">
             <h2>Ready to Transform Your Video Content?</h2>
             <p>Join thousands of content creators who are saving time and boosting their SEO rankings.</p>
-            <a href="#" class="btn btn-primary btn-large">Upgrade to Paid</a>
+            <a href="#"  data-plan-id="2" class="btn btn-primary btn-large">Subscribe to Pro</a>
             <p class="no-credit-card">No credit card required for free plan. Cancel anytime.</p>
         </div>
     </section>
@@ -199,30 +199,10 @@
     <!-- Footer -->
     {% include 'partials/footer.html' %}
 
-    <script src="script.js"></script>
+    <script src="/static/js/pricing.js"></script>
+
     <script>
-        // Toggle between monthly and annual pricing
-        document.getElementById('billing-toggle').addEventListener('change', function() {
-            const isAnnual = this.checked;
-            const monthlyPrices = document.querySelectorAll('.amount.monthly');
-            const annualPrices = document.querySelectorAll('.amount.annual');
-            
-            monthlyPrices.forEach(price => {
-                price.style.display = isAnnual ? 'none' : 'inline';
-            });
-            
-            annualPrices.forEach(price => {
-                price.style.display = isAnnual ? 'inline' : 'none';
-            });
-        });
-        
-        // Initialize pricing display
-        window.addEventListener('DOMContentLoaded', function() {
-            const annualPrices = document.querySelectorAll('.amount.annual');
-            annualPrices.forEach(price => {
-                price.style.display = 'none';
-            });
-        });
+        const USER_ID = "{{ current_user.id }}";
     </script>
 </body>
 </html>
