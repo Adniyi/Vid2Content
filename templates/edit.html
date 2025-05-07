@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/edit.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/markdown-to-text@0.1.1/dist/index.min.js"></script> -->
+    <title>Article - VideoScript</title>
+</head>
+<body>
+    {% include 'partials/nav.html' %}
+
+    <div class="result container" id="result">
+        <div class="result-content" id="result-content" style="display: block;">
+            {{article.content}}
+        </div>
+        {% if current_user.is_authenticated %}
+          <div class="download-container" id="download-container">
+            <button class="btn btn-outline" id="downloadHmtl">Download as HTML</button>
+            <button class="btn btn-primary btn-large" id="downloadTxt">Download as TXT</button>
+            <button class="btn btn-secondary btn-large" id="downloadMD">Download as MD </button>
+          </div>
+        {% else %}
+          <div class="register-container">
+            <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
+            <strong>or</strong>
+            <li><a href="{{ url_for('register') }}" class="btn btn-primary">Register</a></li>
+          </div>
+        {% endif %}
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+    <script type="module">
+        import markdownToText from 'https://cdn.jsdelivr.net/npm/markdown-to-text@0.1.1/+esm';
+
+        const downloadHtml = document.getElementById('downloadHmtl');
+        const downloadTxt = document.getElementById('downloadTxt');
+        const downloadMD = document.getElementById('downloadMD');
+        const pageContent = document.getElementById('result-content');
+        const new_html = marked.parse(pageContent.innerText);
+        const new_text = await markdownToText.default(pageContent.innerText);
+        console.log(new_text);
+
+        downloadHtml.addEventListener("click", ()=>{
+            downloadContent('download.html',new_html, "text/html");
+        });
+        downloadTxt.addEventListener("click", ()=>{
+            downloadContent('download.txt',new_text, "text/plain");
+        });
+        downloadMD.addEventListener("click", ()=>{
+            downloadContent('download.md',pageContent.innerText, "text/markdown");
+        });
+
+        function downloadContent(filename, content, mimetype){
+            const blob = new Blob([content], {type: mimetype});
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+    
+</body>
+</html>

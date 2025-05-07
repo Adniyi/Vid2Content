@@ -110,7 +110,7 @@
                         <p>"VidScript has cut my content creation time in half. The articles it generates are well-structured and need minimal editing."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/60x60" alt="Sarah J." class="author-image">
+                        <img src="https://randomuser.me/api/portraits/thumb/women/23.jpg" alt="Sarah J." class="author-image">
                         <div class="author-info">
                             <h4>Sarah Johnson</h4>
                             <p>Content Creator</p>
@@ -122,7 +122,7 @@
                         <p>"I've seen a 40% increase in organic traffic since I started using VidScript to repurpose my YouTube content."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/60x60" alt="Mark T." class="author-image">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Mark T." class="author-image">
                         <div class="author-info">
                             <h4>Mark Thompson</h4>
                             <p>Digital Marketer</p>
@@ -134,7 +134,7 @@
                         <p>"The SEO optimization is impressive. My articles are ranking for keywords I didn't even specifically target."</p>
                     </div>
                     <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/60x60" alt="Lisa R." class="author-image">
+                        <img src="https://randomuser.me/api/portraits/thumb/women/92.jpg" alt="Lisa R." class="author-image">
                         <div class="author-info">
                             <h4>Lisa Rodriguez</h4>
                             <p>SEO Specialist</p>
@@ -150,8 +150,12 @@
         <div class="container">
             <h2>Ready to Transform Your Video Content?</h2>
             <p>Join thousands of content creators who are saving time and boosting their SEO rankings.</p>
-            <a href="#" class="btn btn-primary btn-large">Start Your Free Trial</a>
-            <p class="no-credit-card">No credit card required. 5 free conversions included.</p>
+            {% if current_user.is_authenticated %}
+                <a href="/pricing" class="btn btn-primary btn-large">Start Your Free Trial</a>
+            {% else %}
+                <a href="/login" class="btn btn-primary btn-large">Start Your Free Trial</a>
+            {% endif %}
+            <p class="no-credit-card">No credit card required. 3 free conversions included.</p>
         </div>
     </section>
 

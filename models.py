@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import UniqueConstraint  # Make sure this is imported
 from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
@@ -14,7 +14,7 @@ class User(db.Model):
     is_verified = db.Column(db.Boolean, default=False)
     customer_id = db.Column(db.String(255))
 
-    subscriptions = db.relationship('Subscription', back_populates='user')
+    subscriptions = db.relationship('Subscription', back_populates='user',lazy=True)
     articles = db.relationship('Article', back_populates='user')
     videos = db.relationship('Video', back_populates='user')
     usage = db.relationship('UserUsage', back_populates='user')
@@ -35,9 +35,11 @@ class Subscription(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id', ondelete='CASCADE'))
     ends_at = db.Column(db.DateTime)
-    starts_at = db.Column(db.DateTime)
+    starts_at = db.Column(db.DateTime, default=func.now())
     renews_at = db.Column(db.DateTime)
     status = db.Column(db.String(50))
+    subscription_code = db.Column(db.String(255))  # <- Add this
+    email_token = db.Column(db.String(255))  # <- Add this
 
     user = db.relationship('User', back_populates='subscriptions')
     plan = db.relationship('Plan', back_populates='subscriptions')
@@ -48,8 +50,9 @@ class Video(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     youtube_url = db.Column(db.String(255), nullable=False)
     video_title = db.Column(db.String(255))
-    duration_seconds = db.Column(db.Integer)
-    processed_at = db.Column(db.DateTime)
+    duration_seconds = db.Column(db.String(40))
+    processed_at = db.Column(db.DateTime, default=func.now())
+    thumbnail_url = db.Column(db.String(255))
 
     user = db.relationship('User', back_populates='videos')
     transcription = db.relationship('Transcription', back_populates='video', uselist=False)

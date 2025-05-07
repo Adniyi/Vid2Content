@@ -90,7 +90,7 @@ button:disabled {
 }
 
 .result {
-    display: none;  
+    /* display: none;   */
     padding: 15px;
     /* background-color: ; */
     border-radius: 8px;
@@ -98,9 +98,13 @@ button:disabled {
     position: relative;
 }
 
+
+
 .result-content{
     height: 200px;
 }
+
+
 
 .copy-icon {
     position: absolute;

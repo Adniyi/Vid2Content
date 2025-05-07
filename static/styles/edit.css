@@ -1,0 +1,124 @@
+/* Styles for edit.html page */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Remove background color to avoid affecting footer and nav */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    /* background-color: #fff; */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.result-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin-bottom: 30px;
+}
+
+.download-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px; /* add space below buttons to footer */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* subtle elevation */
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.download-container .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.download-container .btn-outline {
+    background-color: transparent;
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.download-container .btn-outline:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.download-container .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.download-container .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.download-container .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.download-container .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.register-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.register-container li {
+    list-style: none;
+    display: inline;
+}
+
+.register-container a.btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.register-container a.btn-outline {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.register-container a.btn-outline:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.register-container a.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+}
+
+.register-container a.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+strong {
+    font-weight: 600;
+    color: #555;
+}

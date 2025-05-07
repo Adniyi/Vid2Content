@@ -6,7 +6,7 @@ function ready(){
             e.preventDefault();
 
             const planId = parseInt(this.dataset.planId);
-            const url = planId === 1 ? "/subscribe_free_plan" : "/start_subscription";
+            const url = planId === 1 ? "https://4d31-102-91-105-145.ngrok-free.app/subscribe_free_plan" : "https://4d31-102-91-105-145.ngrok-free.app/start_subscription";
 
             fetch(url, {
                 method: "POST",

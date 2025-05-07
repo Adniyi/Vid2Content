@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const downlaodHtml = document.getElementById('downloadHmtl');
     const downlaodTxt = document.getElementById('downloadTxt');
     const downloadMd = document.getElementById('downloadMD');
+    const saveBtn = document.getElementById('save-btn');
     let raw_markdown = "";
     // API endpoint and socket connection
-    const API_ENDPOINT = "http://127.0.0.1:5000/transcript";
-    const socket = io("http://localhost:5000");
+    const API_ENDPOINT = "https://4d31-102-91-105-145.ngrok-free.app/transcript";
+    const socket = io("https://4d31-102-91-105-145.ngrok-free.app");
 
     socket.on("progress", (data) => {
         console.log("[Progress]", data.message);
@@ -27,13 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     
-    
-
-    // socket.on("error", (data) => {
-    //     console.error("[ERROR]", data.message);
-    //     // document.getElementById("status").innerText = "❌ " + data.message;
-    //     displayProgress(data.message);
-    // });
 
 
     // Event listener for process button
@@ -77,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: youtubeLink }),
+                body: JSON.stringify({ 
+                    url: youtubeLink ,
+                    user_id: USER_ID,  // Expose this from Flask: const USER_ID = "{{ current_user.id }}";
+                }),
             });
 
             if (!response.ok) {
@@ -89,7 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 showResult(ErrorMessage);
             }
             const reader = response.body.getReader();
-            let output = "";
+            let output = "";    
+
+            const transcriptionId = response.headers.get("X-Transcription-ID");
+            console.log("Transcription ID:", transcriptionId); 
             
 
             while(true){
@@ -98,22 +98,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 showResult(output); 
 
                 if(done){
+                    saveBtn.disabled = false
+                    saveBtn.addEventListener('click', async ()=>{
+                        const content = raw_markdown;
+                        if(!transcriptionId) return alert("Missing transcrition ID");
+
+                        const response = await fetch("/save_article",{
+                            method: 'POST',
+                            headers:{'Content-Type': 'application/json'},
+                            body:JSON.stringify({
+                                user_id:USER_ID,
+                                transcription_id:transcriptionId,
+                                content:content
+                            })
+                        });
+                        const data = await response.json()
+                        if (data.success) {
+                            alert("Article saved Successfully");
+                            downloadContainer.style.display = 'block';
+                        }else{
+                            alert("Failed to save article");
+                        }
+                    });
+
                     return;
                 }
+
+                
             }
 
-
-            // console.log(data.combined_keywords);
-            // console.log(data.text);
-
-            // Handle server error in response
-            if (data.error) {
-                displayError(data.error);
-                result.style.display = "none";
-            } else {
-                // Display result content
-                showResult(data.text);
-            }
+        
         } catch (error) {
             console.error('Error processing YouTube link:', error);
             displayError('Error processing video. Please try again.');
@@ -132,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMessage.style.display = 'block';
     }
 
+    
     /**
      * Hide the error message
      */
@@ -159,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const html = marked.parse(content);
         result.style.display = 'block';
         resultContent.innerHTML = html;
-        downloadContainer.style.display = 'block';
     }
 
     function displayProgress(message){
@@ -185,6 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     }
+
+    
 
     function downloadContent(filename, content, mimetype){
         const blob = new Blob([content], {type: mimetype});

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/styles/generate.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>YouTube Link Processor</title>
   <style>
     
@@ -43,12 +44,17 @@
           <br>
         </div>
         {% if current_user.is_authenticated %}
+          <button id="save-btn" disabled class="btn btn-outline"><i class="fas fa-download"></i></button><br><br>
           <div class="download-container" id="download-container">
+            {% if user_plan == "free" %}
+            <button class="btn btn-outline" id="downloadHmtl">Download as HTML</button>
+            {% elif user_plan == "pro" %}
             <button class="btn btn-outline" id="downloadHmtl">Download as HTML</button>
             <button class="btn btn-primary btn-large" id="downloadTxt">Download as TXT</button>
             <button class="btn btn-secondary btn-large" id="downloadMD">Download as MD </button>
+            {% endif %}
           </div>
-        {% else if %}
+        {% else %}
           <div class="register-container">
             <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
             <strong>or</strong>
@@ -65,5 +71,9 @@
 
   <script src="/static/js/script4.js"></script>
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  
+  <!-- <script>
+    const USER_ID = "{{ current_user.id }}";
+  </script> -->
 </body>
 </html>

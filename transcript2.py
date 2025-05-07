@@ -9,6 +9,8 @@ import os
 import yt_dlp
 import re
 import asyncio
+from youtube_details import get_thumbnail_urls
+
 
 
 load_dotenv()
@@ -34,6 +36,15 @@ class Transcript:
         return re.sub(r'[<>:"/\\|?*]', '', filename)
     
     
+    def get_video_details(self,video_url):
+        with yt_dlp.YoutubeDL({'quiet':True}) as ydl:
+            info_dict = ydl.extract_info(video_url, download=False)
+            title = info_dict.get('title', 'audio')
+            thumbnail_url = get_thumbnail_urls(info_dict)['default']
+            length = info_dict.get('duration_string')
+        
+        return title,thumbnail_url,length
+
     def download_youtube_video(self, video_url):
         if self.audio_path and os.path.exists(self.audio_path):
             return self.audio_path
