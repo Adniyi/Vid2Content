@@ -597,11 +597,13 @@ def handle_subscription_disabled(data):
     subscription_code = data['subscription_code']
     email_token = data['email_token']  
 
-    subscription = Subscription.query.filter_by(subscription_code=subscription_code,email_token=email_token).first()
+    subscription = Subscription.query.filter_by(user_id=current_user.id, status="non-renewing",subscription_code=subscription_code,email_token=email_token).first()
     if not subscription:
         return jsonify({"error":"Subscription not found"}), 404
     subscription.status = "cancelled"
+    subscription.plan.name = 'free'
     db.session.commit()
+    return jsonify({"error":"Your Subcription has been cancled and you will be moves to the free plan"}), 403
 
 @app.route("/subscribe_free_plan", methods=["POST"])
 def subscribe_free_plan():
